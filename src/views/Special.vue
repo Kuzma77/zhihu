@@ -1,23 +1,37 @@
 <template>
 	<div>
-		<div class="banner">
-			<img src="" alt="">
-			<h3>最新专题</h3>
-		</div>
 		<div class="container">
-			<div class="row" v-for="(item,index) in specials"  v-if="index<end&&index>=begin" :key="index">
-				<div class="col-4"><img :src="item.banner" alt=""></div>
-				<div class="col-8">
-					<h3>{{item.title}}</h3>
-					<p class="meta">{{item.updated}}更新,{{item.viewCount}}次浏览</p>
-					<p class="introduction">{{item.introduction}}</p>
-					<span v-for="(section,index) in item.sections" :key="index" class="section">
-						{{section.sectionTitle}}
-					</span>
+			<div class="row">
+				<div class="banner">
+					<i class="iconfont">&#xe670;</i>
+					<h3>全部专题</h3>
 				</div>
+				<div class="col-12 box" v-for="(item,index)  in specials" v-if="index>begin&&index<end" :key="index">
+						<div class="box-left"><img :src="item.banner" alt=""></div>
+						<div class="box-right">
+							<div class="box-head">
+							<div class="left">
+							<h3>{{item.title}}</h3>
+							<p class="meta">{{item.updated}}更新,{{item.viewCount}}次浏览</p>
+							</div>
+							<div class="right">
+								<button class="btn_gz">关注专题</button>
+							</div>
+							</div>
+							<div class="box-body">
+								<p class="introduction">{{item.introduction}}</p>
+							</div>
+							<div class="box-bottom">
+								<span v-for="(section,index) in item.sections" :key="index" class="section flex">
+									{{section.sectionTitle}}
+								</span>
+							</div>
+						</div>
+					</div> 
 			</div>
-			<button @click="show_all" class="btn">展开全部</button>
+			<button @click="show_all" class="flex center btn_gz">展开全部>>></button>
 		</div>
+		<div><a href="#top" style="position: fixed; bottom: 5%; right: 5%;"><i class="iconfont">&#xe633;</i></a></div>
 	</div>
 </template>
 
@@ -52,42 +66,62 @@ export default{
 		margin-bottom: 10px;
 		margin-top: -10px;
 		height: 60px;
-		border: 1px solid #d6d6d6;
-		box-shadow: 2px 5px spx #ddd;
-		padding-left: 10%;
 		display: flex;
 		align-items: center;
+		font-size: 20px;
+	}
+	.iconfont{
+		color: rgb(0,132,255);
+		font-size: 32px;
+		margin-right:10px;
+	}
+	.box{
+		display: flex;
+		width: 100%;
+		height: 250px;
+		margin-bottom: 20px;
+		padding: 25px;
+		background-color: white;
+	}
+	.box-left{
+		width: 35%;
+		margin-right: 20px;
 		img{
-			height: 60%;
+			width: 100%;
+			height: 100%;
 		}
 	}
-	.container{
-		.row{
-			display: flex;
-			margin-bottom: 10px;
-			border: 1px solid #d6d6d6;
-			border-radius: 4px;
-			height: 180px;
-			padding: 14px;
-			box-shadow: 0 1px 3px 0 rgba(26,26,26,0.1);
-			.col-4{
-				flex: 0 0 33%;
-				height: 100%;
-				img{
-					width: 100%;
-					height: 100%;
-					border-radius: 10px;
-				}
-			}
-			.col-8{
-				flex: 0 0 66%;
-				height: 100%;
-				img{
-					width: 100%;
-					height: 100%;
-					border-radius: 10px;
-				}
-			}
-		}
+	.box-right{
+		width: 65%;
+		position: relative;
+	}
+	.box-head{
+		display: flex;
+	}
+	.left{
+		width: 83%;
+	}
+	.right{
+		width: 17%;
+		margin-bottom: 30px;
+	}
+	.box-bottom{
+		display: flex;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+	}
+	.section{
+		padding: 0 8px;
+		height: 24px;
+		line-height: 24px;
+		border-radius: 5px;
+		background-color: #f6f6f6;
+		color: #8590a6;
+		font-size: 12px;	
+	}
+	
+	.introduction{
+		display: flex;
 	}
 </style>
