@@ -1,5 +1,7 @@
 <template>
-	<h3>等你来答</h3>
+	<div>
+		<div class="container" style="background-color: white; height: 700px;"></div>
+	</div>
 </template>
 
 <script>

@@ -1,8 +1,8 @@
 <template>
-	<div>	
-			<h3>关注</h3>
+	<div>
+		<div class="back" style="background-color: white; width: 100%; height: 700px;">
+		</div>
 	</div>
-	
 </template>
 
 <script>

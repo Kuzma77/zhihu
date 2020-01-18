@@ -2,7 +2,7 @@
 	<div>
 		<div class="container">
 			<div class="row">
-				<div class="col-10">
+				<div class="col-8">
 					<div class="row">
 				<div class="col-3 area" v-for="(item,index)  in roundTables" v-if="index>begin&&index<end" :key="index">
 				<div class="area-head">
@@ -15,7 +15,7 @@
 					</div>
 					 </div>
 					</div>
-					<div class="col-2" style="background-color: cornflowerblue; width: 10px; height: 700px;"></div>
+					<div class="col-4" style="background-color: white;  height: 700px;"></div>
 			</div>
 			<button @click="show_all" class="flex center btn_gz">展开全部>>></button>
 		</div>
@@ -49,17 +49,23 @@ export default{
 </script>
 
 <style  lang="scss" scoped>
-	.col-10{
+	.col-8{
 		flex: 0 0 83.3%;
 		img{
 			width: 100%;
 			height: 100%;
 		}
 	}
+	.col-4{
+		flex: 0 0 16.6%;
+	}
+	.col-3{
+		flex: 0 0 25%;
+	}
 	.area{
 		margin-right: 20px;
 		margin-bottom: 20px;
-		width: 100%;
+		width: 200px;
 		height: 200px;
 		box-shadow: 0 1px 3px 0 rgba(26,26,26,.1);
 	}

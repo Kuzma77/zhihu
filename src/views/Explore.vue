@@ -65,7 +65,7 @@ export default{
 	data(){
 		return{
 			specials:[],
-			roundTables:[]
+			roundTables:[],
 		};
 	},
 	created() {
@@ -85,7 +85,7 @@ export default{
 	.banner{
 		width: 100%;
 		margin-bottom: 10px;
-		margin-top: -10px;
+		margin-top: 10px;
 		height: 60px;
 		display: flex;
 		align-items: center;
