@@ -2,9 +2,16 @@
 	<div>
 		<div class="container">
 			<div class="row">
-				<div class="col-8">
-					<div class="row">
-				<div class="col-3 area" v-for="(item,index)  in roundTables" v-if="index>begin&&index<end" :key="index">
+				<div class="col-12 head flex flex-between">
+					<div class="yz">
+						<p>圆桌</p>
+					</div>
+					<div class="jb">
+						<p>举办圆桌</p>
+					</div>
+				</div>
+				<div class="col-3" v-for="(item,index)  in roundTables" v-if="index>begin&&index<end" :key="index">
+				<div class="area">
 				<div class="area-head">
 					<img :src="item.banner" alt="">
 					<p class="name">{{item.name}}</p>
@@ -12,10 +19,8 @@
 				<div class="area-body">
 					<p>{{item.visits_count}}人访问,{{item.include_count}}人参与</p>
 				</div>
-					</div>
-					 </div>
-					</div>
-					<div class="col-4" style="background-color: white;  height: 700px;"></div>
+				</div>
+				</div>
 			</div>
 			<button @click="show_all" class="flex center btn_gz">展开全部>>></button>
 		</div>
@@ -30,7 +35,7 @@ export default{
 		return{
 			roundTables:[],
 			begin:0,
-			end:10,
+			end:13,
 		};
 	},
 	created() {
@@ -49,25 +54,46 @@ export default{
 </script>
 
 <style  lang="scss" scoped>
-	.col-8{
-		flex: 0 0 83.3%;
-		img{
-			width: 100%;
-			height: 100%;
-		}
+	.head{
+		margin-bottom: 20px;	
 	}
-	.col-4{
-		flex: 0 0 16.6%;
+	.row{
+		width: 93%;
+		margin: auto;
+		margin-top: 10px;
+		background-color: white;
+		padding: 20px;
+	}
+	.yz{
+		font-weight: 600;
+		color: #1A1A1A;
+		font-size: 15px;
+		line-height: 20px;
+	}
+	.jb{
+		color: #0084FF;
+		font-weight: 600;
+		font-size: 14px;
+		line-height: 20px;
 	}
 	.col-3{
 		flex: 0 0 25%;
+		img{
+			height: 190px;
+			width: 100%;
+			border-radius: 6px;
+			box-shadow: 2px black;
+		}
 	}
 	.area{
-		margin-right: 20px;
-		margin-bottom: 20px;
-		width: 200px;
-		height: 200px;
-		box-shadow: 0 1px 3px 0 rgba(26,26,26,.1);
+		margin-bottom: 30px;
+		border-radius: 5px;
+		padding-right: 50px;
+		margin-top: 20px;
+		height: 240px;
+		img{
+			border-radius: 5px;
+		}
 	}
 	.area-head{
 		height: 80%;
@@ -76,7 +102,7 @@ export default{
 	.area-body{
 		height: 20%;
 		background-color: white;
-		margin-top: 5px;
+		padding: 10px;
 		font-size: 14px;
 		width: 100%;
 		color: #778087;	

@@ -4,7 +4,6 @@
 	margin: 0;
 	padding: 0;
 }
-
 img {
 	border: none;
 }
@@ -109,6 +108,13 @@ a:active {
 .abs-center-right {
 	position: absolute;
 	left: 82%;
+	top: 50%;
+	transform: translate(-82%, -50%);
+}
+
+.abs-center-left {
+	position: absolute;
+	right: 82%;
 	top: 50%;
 	transform: translate(-82%, -50%);
 }

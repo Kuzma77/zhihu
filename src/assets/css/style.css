@@ -7,11 +7,12 @@
 /* 导航条 */
 	.nav {
 		background: #fff;
-		top: 0;
+		top: 0px;
 		text-decoration: none;
+		position: absolute;
 	}	
 	.nav-bar {
-		width: 84%;
+		width: 82%;
 		margin: auto;
 		height: 50px;
 	}
@@ -23,7 +24,7 @@
 	}
 	.nav-item {
 		height: 70px;
-		margin-left: 50px;
+		margin-left: 35px;
 		line-height: 50px;
 		font-weight: 750;
 		font-size: 15px;
