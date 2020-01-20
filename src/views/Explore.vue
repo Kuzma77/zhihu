@@ -64,6 +64,47 @@
 					 </div>
 					<div class="center"><router-link to="/roundTable/all" class="l">查看更多圆桌></router-link></div>
 			</div>
+			<div class="row">
+				<div class="banner">
+					<svg class="Zi Zi--Star" fill="currentColor" viewBox="0 0 24 24" width="36" height="36" style="fill: #0084FF; margin-right: 20px;">
+						<path d="M5.515 19.64l.918-5.355-3.89-3.792c-.926-.902-.639-1.784.64-1.97L8.56 7.74l2.404-4.871c.572-1.16 1.5-1.16 2.072 0L15.44 7.74l5.377.782c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.219 1.274-.532 1.82-1.676 1.218L12 18.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z" fill-rule="evenodd"></path>
+					</svg>
+					<h3>热门收藏夹</h3>
+				</div>
+				<div class="col-6" v-for="(item,index) in favorites" :key="index">
+					<div class="colltion">
+						<div class="colltion-head flex" style="border-bottom: 1px solid #ebebeb;">
+							<div class="c-left" style="width: 75%;">
+								<p style="font-size: 20px; line-height: 28px; height: 28px; font-weight: 600;margin-bottom: 10px; ">{{item.title}}</p>
+								<div style="display: flex; align-items: center; margin-bottom: 10px;">
+									<img :src="item.creatorAvatar" alt="" style="width: 40px;height: 40px; margin: 5px;">
+									<p>{{item.creatorName}}</p>
+									<p style="font-size: 14px; color: #999999;margin-left: 4px; font-weight: 400;">创建</p>
+									<p style="margin-left: 12px;padding-left: 12px;height: 19px;line-height: 19px;font-size: 14px;color: #999;border-left: 2px solid #ebebeb;">{{item.followers}}人关注</p>
+								</div>
+							</div>
+							<div class="c-right" style="width: 25%;">
+								<button class="btn_gz" style="margin-bottom: 45px;">关注收藏夹</button>
+							</div>
+							</div>
+						<div class="colltion-body flex" style="padding-top: 20px;">
+							<div>
+								<p style="line-height: 21px; font-weight: 600;">{{item.questionTitle}}</p>
+								<p style="margin-top: 4px;height: 21px;line-height: 21px;color: #444;white-space: nowrap;">{{item.answerAuthorName}}: {{item.answerContent.slice(0,22) }}...</p>
+							</div>
+							<div class="flex" style="margin-top: 10px; margin-bottom: 10px; width: 100%;">
+								<span style="height: 20px;line-height: 20px;padding: 0 4px;background-color: #f6f6f6;color: #999;font-size: 12px;margin-right: 8px;">文章</span>
+								<p style="height: 17px; font-size: 12px; color: #999999;margin-right: 5px;">{{item.voteUpCount}}赞同</p>
+								<p style="height: 17px; font-size: 12px; color: #999999;">{{item.commentCount}}评论</p>
+							</div>
+							<div>
+								<p style="align-items: center;margin-top: 20px;height: 24px;font-size: 14px;color: #8590a6;font-weight: 600;">已收藏{{item.totalCount}}条内容  ></p>
+							 </div>
+						</div>
+					</div>
+					 </div>
+					<div class="center"><router-link to="/favorite/all" class="l">查看更多收藏夹></router-link></div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -75,6 +116,7 @@ export default{
 		return{
 			specials:[],
 			roundTables:[],
+			favorites:[],
 		};
 	},
 	created() {
@@ -85,6 +127,10 @@ export default{
 		this.axios.get('http://localhost:8080/api/roundTable').then(res =>{
 			console.log(res);
 			this.roundTables = res.data.data;
+		});
+		this.axios.get('http://localhost:8080/api/favorite').then(res =>{
+			console.log(res);
+			this.favorites = res.data.data;
 		});
 	}
 };
@@ -181,5 +227,16 @@ export default{
 			padding: 5px;
 		}
 	}
-	
+	.colltion{
+		padding: 20px;
+		background-color: white;
+		margin-right: 20px;
+		margin-bottom: 20px;
+	}
+	.colltion-head{
+		width: 30;
+	}
+	.colltion-body{
+		width: 70%;
+	}
 </style>

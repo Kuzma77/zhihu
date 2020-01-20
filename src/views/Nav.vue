@@ -71,13 +71,11 @@ export default{
 <style lang="scss" scoped>
 	.router-link-active{
 		border-bottom: 2px solid rgb(0,132,255);	
-		ont-weight: 600;
-		font-synthesis: style;
 		color: #444;
 	}
 	.gutter{
 		position: relative;
-		margin-bottom: 5px;
+		color: #8590a6;
 	}
 	.bell-comment{
 		margin-bottom: 18px;
@@ -159,6 +157,7 @@ export default{
 	.nav {
 		top: 0px;
 		position: sticky;
+		margin-bottom: 10px;
 	}	
 	.serach{
 		font-family: -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif;

@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import Expore from '../views/Explore.vue'
 import Special from '../views/Special.vue'
 import RoundTable from '../views/RoundTable.vue'
+import Favorite from '../views/Favorite.vue'
 import Recommoned from '../views/Recommoned.vue'
 import Follow from '../views/Follow.vue'
 import Hot from '../views/Hot.vue'
@@ -54,6 +55,10 @@ const routes = [
 	{
 		path:'roundTable/all',
 		component:() => import('../views/RoundTable.vue')
+	},
+	{
+		path:'favorite/all',
+		component:() => import('../views/Favorite.vue')
 	},
 	{
 		path:'question/waiting',
