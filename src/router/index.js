@@ -6,6 +6,7 @@ import Expore from '../views/Explore.vue'
 import Special from '../views/Special.vue'
 import RoundTable from '../views/RoundTable.vue'
 import Favorite from '../views/Favorite.vue'
+import Column from '../views/Column.vue'
 import Recommoned from '../views/Recommoned.vue'
 import Follow from '../views/Follow.vue'
 import Hot from '../views/Hot.vue'
@@ -69,7 +70,11 @@ const routes = [
   {
   	path:'/login',
   	component:Login
-  }
+  },
+  {
+  	path:'/column/all',
+  	component:() => import('../views/Column.vue')
+  },
 ]
 
 const router = new VueRouter({

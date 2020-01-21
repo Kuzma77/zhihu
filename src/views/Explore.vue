@@ -20,12 +20,14 @@
 							<div class="right">
 								<button class="btn_gz">关注专题</button>
 							</div>
-							<p class="introduction">{{item.introduction}}</p>
 						</div>
 						<div class="card-buttom">
-						<span v-for="(section,index) in item.sections" :key="index" class="section flex">
-							{{section.sectionTitle}}
-						</span>
+						<div class="con">
+							<div v-for="(section,index) in sections" :key="index" class="con-body">
+								<span class="con-name">{{section.name}}</span>
+								<span class="con-des">{{section.description}}</span>
+							</div>
+						</div>
 						</div>
 						</div>
 					</div> 
@@ -45,20 +47,28 @@
 								<img :src="item.banner" alt="">
 							</div>
 							<div class="card-main">
-								<p class="name">{{item.name}}</p>
-								<p>{{item.visitsCount}}人访问,{{item.includeCount}}人参与</p>
+								<p class="c-name">{{item.name}}</p>
+								<p class="c-des">进入21世纪以后，随着科学技术特别是计算机技术、数字化与图像识别技术、人工神经网络技术和机电一体化技术的大发展，无损检测技术获得了快</p>
 							</div>
 							<div class="card-btn">
 								<button class="btn_gz">关注圆桌</button>
 							</div>
 							</div>
 						<div class="card-body flex">
-							<p class="introduction">{{item.urlToken}}</p>
-						</div>
-						<div class="card-buttom">
-						<span v-for="(section,index) in item.sections" :key="index" class="section flex">
-							{{section.sectionTitle}}
-						</span>
+							<div v-for="(round,index) in rounds" :key="index" class="con-body">
+								<div class="c-body">
+									<span class="c-t">{{round.t1}}</span>
+									<span class="c-answer">2个回答</span>
+								</div>
+								<div class="c-body">
+									<span class="c-t">{{round.t2}}</span>
+									<span class="c-answer">1个回答</span>
+								</div>
+								<div class="c-body">
+									<span class="c-t">{{round.t3}}</span>
+									<span class="c-answer">8个回答</span>
+								</div>
+							</div>
 						</div>
 					</div>
 					 </div>
@@ -98,6 +108,15 @@
 								<p style="height: 17px; font-size: 12px; color: #999999;">{{item.commentCount}}评论</p>
 							</div>
 							<div>
+								<p style="line-height: 21px; font-weight: 600;">{{item.questionTitle}}</p>
+								<p style="margin-top: 4px;height: 21px;line-height: 21px;color: #444;white-space: nowrap;">{{item.answerAuthorName}}: {{item.answerContent.slice(0,22) }}...</p>
+							</div>
+							<div class="flex" style="margin-top: 10px; margin-bottom: 10px; width: 100%;">
+								<span style="height: 20px;line-height: 20px;padding: 0 4px;background-color: #f6f6f6;color: #999;font-size: 12px;margin-right: 8px;">文章</span>
+								<p style="height: 17px; font-size: 12px; color: #999999;margin-right: 5px;">{{item.voteUpCount}}赞同</p>
+								<p style="height: 17px; font-size: 12px; color: #999999;">{{item.commentCount}}评论</p>
+							</div>
+							<div>
 								<p style="align-items: center;margin-top: 20px;height: 24px;font-size: 14px;color: #8590a6;font-weight: 600;">已收藏{{item.totalCount}}条内容  ></p>
 							 </div>
 						</div>
@@ -105,6 +124,23 @@
 					 </div>
 					<div class="center"><router-link to="/favorite/all" class="l">查看更多收藏夹></router-link></div>
 			</div>
+		    <div class="row">
+		    	<div class="banner">
+		    		<svg class="Zi Zi--EditCircle" fill="currentColor" viewBox="0 0 24 24" width="36" height="36" style="fill: #0084FF;"><path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm4.043-15.524a.745.745 0 0 0-1.053.017l-6.857 7.071 2.237 2.17 6.857-7.071a.743.743 0 0 0-.016-1.052l-1.168-1.135zm-9.028 9.476l-.348 1.381 1.37-.39 1.274-.36-1.973-1.916-.323 1.285z" fill-rule="evenodd"></path></svg>
+		    		<h3>专栏</h3>
+		    	</div>
+		    	<div class="col-3" v-for="(item,index) in columns" :key="index">
+		    		<div class="page">
+						<img :src="item.imageUrl" alt="">
+						<p class="p-name">{{item.title}}</p>
+						<p class="meta">{{item.followers}}关注 {{item.articlesCount}}文章</p>
+						<p class="p-des">{{item.description.slice(0,25) }}</p>
+						<a :href="item.url">
+						<button class="btn_gz">进入专栏</button></a>
+					</div>
+		    		</div> 
+		    		<div class="center"><router-link to="/column/all" class="l">查看更多专栏 ></router-link></div>
+		    </div>
 		</div>
 	</div>
 </template>
@@ -117,6 +153,25 @@ export default{
 			specials:[],
 			roundTables:[],
 			favorites:[],
+			sections:[{
+				"name":'路上不再烦',
+				"description":'过去五年，你的春运之路发生了哪些变化？'
+			},
+			{
+				"name":'回家不再难',
+				"description":'春运如何更好地调配资源，减轻高峰压力？'
+			},
+			{
+				"name":'另一种回家',
+				"description":'老人到子女工作城市过年的「反向春运」方式，会，'
+			},
+			],
+			rounds:[{
+				"t1":'什么是无损检测？',
+				"t2":'无损检测技术都能应用于哪些行业？',
+				"t3":'新型无损检测技术有哪些？其各自的现状及发展又是怎样的？'
+			}],
+			columns:[]
 		};
 	},
 	created() {
@@ -131,6 +186,10 @@ export default{
 		this.axios.get('http://localhost:8080/api/favorite').then(res =>{
 			console.log(res);
 			this.favorites = res.data.data;
+		});
+		this.axios.get('http://localhost:8080/api/column').then(res =>{
+			console.log(res);
+			this.columns = res.data.data;
 		});
 	}
 };
@@ -161,7 +220,7 @@ export default{
 	.card{
 		background-color: white;
 		margin-right: 20px;
-		height: 400px;
+		height: 450px;
 		margin-bottom: 30px;
 		img{
 			border-radius: 5px;
@@ -169,7 +228,7 @@ export default{
 	}	
 	.cards-head{
 		position: relative;
-		height: 240px;
+		height: 220px;
 		background-image: linear-gradient(to right, rgb(0, 0, 255) 0%, rgba(0, 0, 255, 0) 100%);
 	}
 	.card-background{
@@ -193,6 +252,67 @@ export default{
 	}
 	.card-body{
 		margin: 20px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid #ebebeb;
+	}
+	.card-buttom{
+		font-size: 15px;
+		margin: 20px 24px;
+	}
+	.con{
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		height: 24px;
+	}
+	.con-body{
+		margin-bottom: 10px;
+	}
+	.con-name{
+		padding: 0 8px;
+		height: 24px;
+		line-height: 24px;
+		font-size: 12px;
+		color: #8590a6;
+		background-color: #f6f6f6;
+		border-radius: 5px;
+	}
+	.con-des{
+		flex: 1 1;
+		margin-left: 12px;
+		white-space: nowrap;
+	}
+	.c-name{
+	    height: 28px;
+	    line-height: 28px;
+	    color: #fff;
+	    font-size: 20px;
+	    white-space: nowrap;
+	    font-weight: 600;
+	}
+	.c-des{
+		margin-top: 12px;
+		height: 60px;
+		line-height: 20px;
+		font-size: 14px;
+		color: #fff;
+	}
+	.c-body{
+		margin-bottom: 10px;
+	}
+	.c-t{
+		font-size: 15px;
+		height: 21px;
+		line-height: 21px;
+	}
+	.c-answer{
+		display: flex;
+		align-items: center;
+		margin-top: 4px;
+		height: 17px;
+		line-height: 17px;
+		font-size: 12px;
+		color: #999;
 	}
 	.btn_gz{
 		-webkit-tap-highli0ht-color: rgba(26,26,26,0);
@@ -209,9 +329,6 @@ export default{
 		width: 102px;
 		color: #0084ff;
 		background-color: rgba(0,132,255,.08);
-	}
-	.introduction{
-		display: flex;
 	}
 	.name{
 		font-size: 28px;
@@ -238,5 +355,40 @@ export default{
 	}
 	.colltion-body{
 		width: 70%;
+	}
+	.page{
+		background-color: white;
+		margin-right: 10px;
+		margin-bottom: 20px;
+		padding: 28px 24px;
+		display: flex;
+		flex-direction: column;
+		justify-items: center;
+		align-items: center;
+		height: 313px;
+		border-radius: 4px;
+	    box-shadow: 0 1px 3px 0 rgba(26,26,26,.1);
+	}
+	.col-3{
+		img{
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+		}
+	}
+	.p-name{
+		margin-top: 20px;
+		height: 22px;
+		line-height: 22px;
+		font-size: 16px;
+		max-width: 187px;
+		white-space: nowrap;
+		font-weight: 600;
+	}
+	.p-des{
+		font-size: 14px;
+		color: #444;
+		text-align: center;
+		margin-bottom: 20px;
 	}
 </style>

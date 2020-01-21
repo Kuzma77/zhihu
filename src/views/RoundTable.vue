@@ -10,11 +10,12 @@
 						<p>举办圆桌</p>
 					</div>
 				</div>
-				<div class="col-3" v-for="(item,index)  in roundTables" v-if="index>begin&&index<end" :key="index">
+				<div class="col-3" v-for="(item,index)  in roundTables"  :key="index">
 				<div class="area">
 				<div class="area-head">
 					<img :src="item.banner" alt="">
 					<p class="name">{{item.name}}</p>
+					<div class="zhe"></div>
 				</div>
 				<div class="area-body">
 					<p>{{item.visits_count}}人访问,{{item.include_count}}人参与</p>
@@ -22,7 +23,7 @@
 				</div>
 				</div>
 			</div>
-			<button @click="show_all" class="flex center btn_gz">展开全部>>></button>
+			
 		</div>
 		<div><a href="#top" style="position: fixed; bottom: 5%; right: 5%;"><i class="iconfont">&#xe633;</i></a></div>
 	</div>
@@ -34,8 +35,6 @@ export default{
 	data(){
 		return{
 			roundTables:[],
-			begin:0,
-			end:13,
 		};
 	},
 	created() {
@@ -45,10 +44,7 @@ export default{
 		});
 	},
 	methods: {
-	show_all(){
-	this.begin=0;
-	this.end =this.roundTables.length;
-	}						
+					
 	},					
 };
 </script>
@@ -99,6 +95,19 @@ export default{
 		height: 80%;
 		position: relative;
 	}
+	.zhe{
+		margin: 0;
+		min-width: 0;
+		border-radius: 6px;
+		position: absolute;
+		top: 0;
+		width: 190px;
+		height: 190px;
+		left: 0;
+		box-shadow: 0 2px 10px 0 rgba(0,0,0,0.1);
+		background-image: linear-gradient(to bottom,rgba(0,0,0,0),rgba(0,0,0,0.5));
+		z-index: 999;
+	}
 	.area-body{
 		height: 20%;
 		background-color: white;
@@ -112,5 +121,6 @@ export default{
 		bottom: 5%;
 		left: 5%;
 		color: white;
+		z-index: 1000;
 	}
 </style>

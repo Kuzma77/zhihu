@@ -10,7 +10,7 @@ export default new Vuex.Store({
 		user:{
 			id:'1',
 			nickname:'Kuzma',
-			avatar:'https://avatars2.githubusercontent.com/u/55436087?s=40&v=4'
+			avatar:'https://pic3.zhimg.com/50/v2-e9f793b4e24fc991216fd97764fbf487_hd.jpg'
 		}
 	},
 	mutations:{

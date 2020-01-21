@@ -71,7 +71,9 @@ export default{
 <style lang="scss" scoped>
 	.router-link-active{
 		border-bottom: 2px solid rgb(0,132,255);	
-		color: #444;
+		color: black;
+		font-weight: 600;
+		padding-bottom: 13px;
 	}
 	.gutter{
 		position: relative;

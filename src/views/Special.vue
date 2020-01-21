@@ -6,7 +6,7 @@
 					<i class="iconfont">&#xe670;</i>
 					<h3>全部专题</h3>
 				</div>
-				<div class="col-12 box" v-for="(item,index)  in specials" v-if="index>begin&&index<end" :key="index">
+				<div class="col-12 box" v-for="(item,index)  in specials"  :key="index">
 						<div class="box-left"><img :src="item.banner" alt=""></div>
 						<div class="box-right">
 							<div class="box-head">
@@ -29,7 +29,6 @@
 						</div>
 					</div> 
 			</div>
-			<button @click="show_all" class="flex center btn_gz">展开全部>>></button>
 		</div>
 		<div><a href="#top" style="position: fixed; bottom: 5%; right: 5%;"><i class="iconfont">&#xe633;</i></a></div>
 	</div>
@@ -41,8 +40,7 @@ export default{
 	data(){
 		return{
 			specials:[],
-			begin:0,
-			end:6,
+			
 		};
 	},
 	created() {
@@ -52,10 +50,7 @@ export default{
 		});
 	},
 	methods: {
-	show_all(){
-	this.begin=0;
-	this.end =this.specials.length;
-	}						
+						
 	},					
 };
 </script>
