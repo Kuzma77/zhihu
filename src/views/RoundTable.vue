@@ -35,17 +35,61 @@ export default{
 	data(){
 		return{
 			roundTables:[],
+			currentPage: 1,
+			count: 36,
+			scroll: ''
 		};
 	},
 	created() {
-		this.axios.get('http://localhost:8080/api/roundTable/all').then(res =>{
-			console.log(res);
-			this.roundTables = res.data.data;
-		});
+		// this.axios.get('http://localhost:8080/api/roundTable/all').then(res =>{
+		// 	console.log(res);
+		// 	this.roundTables = res.data.data;
+		// });
+		this.axios({
+					method: 'post',
+					url: 'http://localhost:8080/api/roundTable/page',
+					params: {
+						count: this.count,
+						currentPage: this.currentPage
+					}
+				}).then(res => {
+					console.log(res.data.data);
+					this.roundTables = res.data.data;
+					console.log(this.roundTables.length);
+				});
 	},
-	methods: {
-					
-	},					
+	methods: {loadMore() {
+			this.currentPage = this.currentPage + 1;
+			this.axios({
+				method: 'post',
+				url: 'http://localhost:8080/api/roundTable/page',
+				params: {
+					count: this.count,
+					currentPage: this.currentPage
+				}
+			}).then(res => {
+				console.log(res.data.data);
+				let temp = [];
+				temp = res.data.data;
+				for (var i = 0; i < temp.length; i++) {
+					this.roundTables.splice(this.currentPage * this.count, 0, temp[i]);
+				}
+				console.log(this.roundTables.length);
+			});
+		},
+		scrollDs() {
+			var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+			var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
+			var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+			if (scrollTop + windowHeight > scrollHeight - 100) {
+				console.log('到了底部');
+				this.loadMore();
+			}
+		}
+	},
+	mounted() {
+		window.addEventListener('scroll', this.scrollDs);
+	}				
 };
 </script>
 

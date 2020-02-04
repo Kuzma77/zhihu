@@ -36,7 +36,9 @@ a:hover,
 a:active {
 	text-decoration: none;
 }
-  
+a{
+	color: #444444;
+}
 /* 浮动方式 */
 .pull-left {
 	float: left;

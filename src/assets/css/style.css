@@ -3,7 +3,18 @@
 		width: 70%;
 		margin: auto;
 	}
-
+/*回到顶部*/
+.goto-top {
+		position: fixed;
+		right: 30px;
+		bottom: 30px;
+		width: 40px;
+		height: 40px;
+		background: #fff;
+		border: 1px solid #eee;
+		border-radius: 3px;
+		cursor: pointer;
+	}
 /* 导航条 */
 	.nav {
 		background: #fff;
@@ -85,6 +96,9 @@
 	}
 	.col-10{
 		flex: 0 0 83%;
+	}
+	.col-9 {
+		flex: 0 0 75%;
 	}
 	.col-8 {
 		flex: 0 0 66.6%;

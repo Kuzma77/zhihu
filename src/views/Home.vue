@@ -3,6 +3,9 @@
 	<div class="container">
 	<div class="row">
 		<div class="col-8">
+			<div class="img-wrapper">
+								<img src="https://static.zhihu.com/heifetz/assets/NewYear2020Banner.e5ccc19d.png" class="tiny-round mb-1" width="695px" height="95px" />
+			</div>
 			<div class="nav gutter">
 				<div class="nav-bar">
 						<ul class="nav-list ">
@@ -12,7 +15,7 @@
 						</ul>				
 				</div>
 			</div>
-			<router-view />
+			<keep-alive><router-view /></keep-alive>
 		</div>
 		<div class="col-4">
 			<div class="white">
@@ -122,21 +125,70 @@
 					</li>
 				</ul>
 			</div>
+			<footer class="Footer"><a class="Footer-item" target="_blank" rel="noopener noreferrer" href="//liukanshan.zhihu.com/">刘看山</a><span class="Footer-dot"></span><a class="Footer-item" target="_blank" rel="noopener noreferrer" href="/question/19581624">知乎指南</a><span class="Footer-dot"></span><a class="Footer-item" target="_blank" rel="noopener noreferrer" href="/terms">知乎协议</a><span class="Footer-dot"></span><a class="Footer-item" target="_blank" rel="noopener noreferrer" href="/term/privacy">知乎隐私保护指引</a><br><a class="Footer-item" target="_blank" href="/app">应用</a><span class="Footer-dot"></span><a class="Footer-item" target="_blank" rel="noopener noreferrer" href="https://app.mokahr.com/apply/zhihu">工作</a><span class="Footer-dot"></span><button type="button" class="Button OrgCreateButton">申请开通知乎机构号</button><br><a class="Footer-item" target="_blank" rel="noopener noreferrer" href="https://zhuanlan.zhihu.com/p/51068775">侵权举报</a><span class="Footer-dot"></span><a class="Footer-item" target="_blank" rel="noopener noreferrer" href="http://www.12377.cn">网上有害信息举报专区</a><br><a class="Footer-item" target="_blank" rel="noopener noreferrer" href="https://tsm.miit.gov.cn/dxxzsp/">京 ICP 证 110745 号</a><br><a class="Footer-item" target="_blank" rel="noopener noreferrer" href="http://www.beian.miit.gov.cn">京 ICP 备 13052560 号 - 1</a><br><a class="Footer-item" target="_blank" rel="noopener noreferrer" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802020088"><img src="https://pic3.zhimg.com/80/v2-d0289dc0a46fc5b15b3363ffa78cf6c7.png">京公网安备 11010802010035 号</a><br><span class="Footer-item">互联网药品信息服务资格证书<br>（京）- 非经营性 - 2017 - 0067</span><span class="Footer-item">违法和不良信息举报：010-82716601</span><br><a class="Footer-item" target="_blank" href="/jubao">儿童色情信息举报专区</a><br><a class="Footer-item" target="_blank" href="/certificates">证照中心</a><br><a class="Footer-item" target="_blank" href="/contact">联系我们</a><span> © 2020 知乎</span></footer>
 		</div>
 	</div>
 	</div>
+	<button class="goto-top" @click="backToTop" v-show="btnFlag">
+				<svg title="回到顶部" viewBox="0 0 24 24" width="24" height="24" style="fill: grey;">
+					<path
+						d="M16.036 19.59a1 1 0 0 1-.997.995H9.032a.996.996 0 0 1-.997-.996v-7.005H5.03c-1.1 0-1.36-.633-.578-1.416L11.33 4.29a1.003 1.003 0 0 1 1.412 0l6.878 6.88c.782.78.523 1.415-.58 1.415h-3.004v7.005z"
+					></path>
+				</svg>
+			</button>
 </div>
 </template>
 
 <script>
+	export default {
+		name: 'home',
+		data() {
+			return {
+				btnFlag: false
+			};
+		},
+		created() {},
+		mounted() {
+			// window对象，所有浏览器都支持window对象。它表示浏览器窗口，监听滚动事件
+			window.addEventListener('scroll', this.scrollToTop);
+		},
+		methods: {
+			backToTop() {
+				//加定时器，平滑过渡回到顶部
+				let timer = setInterval(() => {
+					let ispeed = Math.floor(-this.scrollTop / 5);
+					document.documentElement.scrollTop = document.body.scrollTop = this.scrollTop + ispeed;
+					if (this.scrollTop === 0) {
+						clearInterval(timer);
+					}
+				}, 16);
+			},
+			// 计算距离顶部的高度，当高度大于300显示回顶部图标，小于300则隐藏
+			scrollToTop() {
+				let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+				this.scrollTop = scrollTop;
+				if (this.scrollTop > 3) {
+					this.btnFlag = true;
+				} else {
+					this.btnFlag = false;
+				}
+			}
+		}
+	};
 </script>
 <style lang="scss" scoped>
 	.router-link-active{
-		border-bottom: 2px solid rgb(0,132,255);
-		color: black;
-		font-weight: 600;
-		padding-bottom: 13px;
+		color: #0084FF;
+		font-weight: 500;
 	}
+	.img-wrapper{
+		img{
+			width: 100%;
+			height: 100%;
+			margin-bottom: 5px;
+		}
+	}
+	
 	.gutter{
 		position: relative;
 		margin-bottom: 2px;
@@ -363,5 +415,37 @@
 		background: #f6f6f6;
 		color: #8590a6;
 		font-size: 12px;
+	}
+	.Footer{
+		font-size: 13px;
+		line-height: 2;
+		color: #8590a6;
+		padding: 0 0 0 5px;
+		margin: 10px;
+	}
+	.Footer-item{
+		font-size: 13px;
+		line-height: 2;
+		color: inherit;
+		text-decoration: none;
+		align-items: center;
+		margin-right: 10px;
+	}
+	.Footer-dot{
+		font-size: 13px;
+		line-height: 2;
+		color: #8590a6;
+	}
+	.OrgCreateButton{
+		margin: 0;
+		font-size: 14px;
+		line-height: 32px;
+		color: #8590a6;
+		text-align: center;
+		cursor: pointer;
+		background: none;
+		border-radius: 3px;
+		border: none;
+		padding: 0;
 	}
 </style>

@@ -17,7 +17,7 @@
 		<h3 class="c-top">
 		<div class="c-word">专栏 · 发现</div></h3>
 		<div class="row content-container">
-		<div class="col-3" v-for="(item,index)  in columns" v-if="(index+1)%16===rest" :key="index">
+		<div class="col-3" v-for="(item,index)  in columns" v-if="index>=begin&&index<=end" :key="index">
 		<div class="content-card">
 			<img :src="item.imageUrl" alt="" class="content-img">
 			<div class="content-info">
@@ -52,7 +52,8 @@
 		data(){
 			return{
 				columns:[],
-				rest:1,
+				begin:0,
+				end:7,
 			};
 		},
 		created() {
@@ -63,13 +64,14 @@
 		},
 		methods: {
 			refresh(){
-				
-				
-					if(this.rest <= 15){
-						this.rest=this.rest+1;}
-					else{
-						this.rest = 1;
-					}
+				if(this.end>=this.columns.length){
+					this.begin=0;
+					this.end=7;
+				}
+				else{
+				this.begin=this.begin+8;
+				this.end=this.end+8;
+				}
 			}
 		},					
 	};
