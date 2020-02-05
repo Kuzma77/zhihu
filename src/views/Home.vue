@@ -198,8 +198,6 @@
 		margin: auto;
 	}
 	.nav {
-		top: 50px;
-		position: sticky;
 		margin-bottom: 2px;
 	}
 	.nav-bar{

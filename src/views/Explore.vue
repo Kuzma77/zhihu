@@ -42,9 +42,9 @@
 				</div>
 				<div class="col-6" v-for="(item,index) in roundTables" :key="index">
 					<div class="card">
-						<div class="cards-head">
+						<div class="cards-head" ref="box">
 							<div class="card-background">
-								<img :src="item.banner" alt="">
+								<img :src="item.banner" alt="" ref="img">
 							</div>
 							<div class="card-main">
 								<p class="c-name">{{item.name}}</p>
@@ -171,7 +171,9 @@ export default{
 				"t2":'无损检测技术都能应用于哪些行业？',
 				"t3":'新型无损检测技术有哪些？其各自的现状及发展又是怎样的？'
 			}],
-			columns:[]
+			columns:[],
+			dominant:'',
+			secondary:'',
 		};
 	},
 	created() {
@@ -182,6 +184,18 @@ export default{
 		this.axios.get('http://localhost:8080/api/roundTable').then(res =>{
 			console.log(res);
 			this.roundTables = res.data.data;
+			// this.$nextTick(() => {
+			// 	let box = this.$refs.box;
+			// 	let img = this.$refs.img;
+			// 	RGBaster.colors(img,{
+			// 		success: function(payload){
+			// 			console.log('主色：'+payload.dominant+',次色'+payload.secondary);
+			// 			this.dominant = payload.dominant;
+			// 			this.secondary = payload.secondary;
+			// 			box.style.background = this.dominant;
+			// 		}
+			// 	})
+			// })
 		});
 		this.axios.get('http://localhost:8080/api/favorite').then(res =>{
 			console.log(res);

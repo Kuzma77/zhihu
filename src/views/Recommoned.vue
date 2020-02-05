@@ -2,7 +2,7 @@
 	<div>
 		<div v-for="(item, index) in recommenedList" :key="index" class="card-recommend flex">
 			<div class="c-recomment-head">
-				<h3 v-if="item.target.question == null" class="m-2">{{ item.target.title }}</h3>
+				<h3 v-if="item.target.question == null">{{ item.target.title }}</h3>
 				<h3 v-else class="m-2">{{ item.target.question.title }}</h3>
 			</div>
 			<div class="c-recomment-body">
@@ -242,15 +242,14 @@ export default {
 	}
 }
 .avatar {
-	width: 24px;
-	height: 24px;
+	width: 12px;
+	height: 12px;
 	border-radius: 50%;
 	background-color: #fff;
 }
 .sticky-bar {
 	position: sticky;
 	bottom: 0;
-	z-index: 1000;
 	background-color: #fff;
 }
 .active {
