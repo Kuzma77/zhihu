@@ -12,6 +12,7 @@ import Follow from '../views/Follow.vue'
 import Hot from '../views/Hot.vue'
 import QuestionWaiting from '../views/QuestionWaiting.vue'
 import Login from '../views/Login.vue'
+import People from '../views/People.vue'
 
 Vue.use(VueRouter)
 
@@ -64,7 +65,11 @@ const routes = [
 	{
 		path:'question/waiting',
 		component:() => import('../views/QuestionWaiting.vue')
-	}
+	},
+	{
+					path: 'people',
+					component: () => import('../views/People.vue')
+				}
 	]
   },
   {

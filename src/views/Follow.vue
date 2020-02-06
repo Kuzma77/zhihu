@@ -36,14 +36,14 @@
 									</div> 
 								</div>
 				<!-- 点击“阅读全文”显示 -->
-								<div v-if="flags[index]" style="padding: 10px;">
+								<div v-if="flags[index]">
 									<div style="display: inline-flex;">
-										<img :src="item.target.author.avatar_url" class="avatar" />
+										<img :src="item.target.author.avatar_url" class="w-avatar" />
 										<h4>{{ item.target.author.name }}</h4>
 										<span>{{ item.target.author.headline }}</span>
 									</div>
-									<p class="light-grey">{{ item.target.voteup_count }}人赞同了该回答</p>
-									<div v-html="item.target.content" class="content"></div>
+									<p class="left-grey">{{ item.target.voteup_count }}人赞同了该回答</p>
+									<div v-html="item.target.content"></div>
 								</div>
 			</div>
 			<div class="c-recommend-foot sticky-bar">
@@ -163,6 +163,13 @@ export default {
 		padding: 20px;
 		height: 100%;
 		border-bottom: 1px solid #f0f2f7;
+		.w-avatar{
+			width: 24px;
+			height: 24px;
+			background: #fff;
+			border-radius: 2px;
+			vertical-align: top;
+		}
 }
 .c-recomment-head{
 	cursor: pointer;
@@ -215,6 +222,12 @@ export default {
 		fill: #8590a6;
 	}
 }
+.left-grey{
+	color: #8590a6;
+	font-size: 14px;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
 /* 两行省略号 */
 .ellipsis {
 	display: -webkit-box;
@@ -241,12 +254,7 @@ export default {
 		color: #0084FF;
 	}
 }
-.avatar {
-	width: 24px;
-	height: 24px;
-	border-radius: 50%;
-	background-color: #fff;
-}
+
 .sticky-bar {
 	position: sticky;
 	bottom: 0;

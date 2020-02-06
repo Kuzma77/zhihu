@@ -74,7 +74,7 @@
 								</div>
 								
 					</div>
-					<p class="tx-center light-grey mt-4 mb-4 no-more">没有更多内容</p>
+					<p class="tx-center light-grey no-more">没有更多内容</p>
 				</div>
 			</div>
 		</div>

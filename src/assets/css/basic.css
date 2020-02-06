@@ -189,7 +189,9 @@ a{
 	.border-bottom{
 		border-bottom: 1px solid gray;
 	}
-
+.grey-icon{
+	color: #999999;
+}
 
 
 
