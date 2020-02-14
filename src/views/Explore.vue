@@ -41,18 +41,22 @@
 					<h3>圆桌讨论</h3>
 				</div>
 				<div class="col-6" v-for="(item,index) in roundTables" :key="index">
-					<div class="card">
-						<div class="cards-head" ref="box">
-							<div class="card-background">
-								<img :src="item.banner" alt="" ref="img">
+					<div class="roundtable-card">
+							<button class="btn-follow-table" ref="btn">关注圆桌</button>
+							<div class="card-img-wrapper" ref="box">
+								<img :src="item.banner" ref="bgImg" />
+								<div class="mask" ref="mask1"></div>
+								<div class="mask" ref="mask2"></div>
 							</div>
 							<div class="card-main">
 								<p class="c-name">{{item.name}}</p>
 								<p class="c-des">进入21世纪以后，随着科学技术特别是计算机技术、数字化与图像识别技术、人工神经网络技术和机电一体化技术的大发展，无损检测技术获得了快</p>
-							</div>
-							<div class="card-btn">
-								<button class="btn_gz">关注圆桌</button>
-							</div>
+							    <div class="info">
+							    	<img src="../assets/image/短发1.jpg" alt="">
+							    	<img src="../assets/image/短发2.jpeg" alt="">
+							    	<img src="../assets/image/短发3.jpeg" alt="">
+							    	<span>5 位嘉宾参与  |  260人关注</span>
+							    </div>
 							</div>
 						<div class="card-body flex">
 							<div v-for="(round,index) in rounds" :key="index" class="con-body">
@@ -184,18 +188,55 @@ export default{
 		this.axios.get('http://localhost:8080/api/roundTable').then(res =>{
 			console.log(res);
 			this.roundTables = res.data.data;
-			// this.$nextTick(() => {
-			// 	let box = this.$refs.box;
-			// 	let img = this.$refs.img;
-			// 	RGBaster.colors(img,{
-			// 		success: function(payload){
-			// 			console.log('主色：'+payload.dominant+',次色'+payload.secondary);
-			// 			this.dominant = payload.dominant;
-			// 			this.secondary = payload.secondary;
-			// 			box.style.background = this.dominant;
-			// 		}
-			// 	})
-			// })
+			this.$nextTick(() => {
+							//获得循环中的引用对象，都将会是数组的形式
+							let boxArr = this.$refs.box;
+							let imgArry = this.$refs.bgImg;
+							let btnArr = this.$refs.btn;
+							let mask1Arr = this.$refs.mask1;
+							let mask2Arr = this.$refs.mask2;
+							//遍历，对每个对象进行处理
+							for (var i = 0, len = boxArr.length; i < len; i++) {
+								let box = boxArr[i];
+								let img = imgArry[i];
+								let btn = btnArr[i];
+								let mask1 = mask1Arr[i];
+								let mask2 = mask2Arr[i];
+								//第三方库，可以获取图片的主色、次色等
+								RGBaster.colors(img, {
+									success: function(payload) {
+										// payload.dominant是主色，payload.secondary是次色, payload.palette是调色板，含多个主要颜色数组,RGB形式表示
+										this.dominant = payload.dominant;
+										this.secondary = payload.secondary;
+										// console.log('主色：' + payload.dominant);
+										//去掉rgb的外层rgb字母和括号，得到112,34,56这样的值
+										let str = payload.dominant.substring(4, payload.dominant.length - 1);
+										//按逗号分割，得到字符串数组
+										let strArr = str.split(',');
+										//分别获得r,g,b的值，并转为整型
+										let r = parseInt(strArr[0]);
+										let g = parseInt(strArr[1]);
+										let b = parseInt(strArr[2]);
+										// console.log(r + '=>' + g + '=>' + b);
+										//定义两个透明度的值
+										let a1 = 0;
+										let a2 = 0.5;
+										//创建两个rgba颜色，用来生成遮罩层的渐变色
+										let color1 = `rgba(${r},${g},${b},${a1})`;
+										let color2 = `rgba(${r},${g},${b},${a2})`;
+										// console.log('颜色1：' + color1);
+										// console.log('颜色2：' + color2);
+										//圆桌卡片顶部整宽部分背景色设置为图片主色
+										box.style.backgroundColor = this.dominant;
+										//右侧logo图覆盖两层蒙版，使用以下渐变色规则
+										mask1.style.background = 'linear-gradient(to right,' + this.dominant + ' 0%,' + color1 + ' 100%)';
+										mask2.style.background = 'linear-gradient(to right,' + color2 + ' 0%,' + color1 + ' 100%)';
+										//关注按钮的文字颜色，使用图片主色
+										btn.style.color = this.dominant;
+									}
+								});
+							}
+						});
 		});
 		this.axios.get('http://localhost:8080/api/favorite').then(res =>{
 			console.log(res);
@@ -240,29 +281,67 @@ export default{
 			border-radius: 5px;
 		}
 	}	
-	.cards-head{
-		position: relative;
-		height: 220px;
-		background-image: linear-gradient(to right, rgb(0, 0, 255) 0%, rgba(0, 0, 255, 0) 100%);
-	}
-	.card-background{
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		width: 240px;
-	}
-	.card-main{
-		position: relative;
-		width: 320px;
-		padding: 68px 24px 24px;
-	}
-	.card-btn{
-		position: absolute;
-		right: 24px;
-		bottom: 24px;
-		background-color: white;
+	.roundtable-card {
+		height: 430px;
+		margin-right: 20px;
+		margin-bottom: 30px;
+		border: 1px solid #eee;
+		box-sizing: border-box;
 		border-radius: 5px;
+		box-shadow: 0 1px 3px 0 rgba(26, 26, 26, 0.1);
+		background-color: #fff;
+		position: relative;
+		.btn-follow-table {
+			position: absolute;
+			right: 10%;
+			top: 40%;
+			flex-shrink: 0;
+			width: 88px;
+			height: 34px;
+			background-color: #fff;
+			font-size: 14px;
+			font-weight: 600;
+			border-radius: 3px;
+			z-index: 20;
+		}
+		.card-img-wrapper {
+			position: relative;
+			width: 100%;
+			height: 240px;
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+			img,
+			.mask {
+				position: absolute;
+				top: 0;
+				right: 0;
+				width: 240px;
+				height: 240px;
+				border-top-right-radius: 5px;
+			}
+		}
+		}
+	.card-main{
+		position: absolute;
+		top: 15%;
+		left: 5%;
+		width: 65%;
+		color: #fff;
+		.info{
+			display: flex;
+			align-items: center;
+			margin-top: 19px;
+			img{
+				width: 40px;
+				height: 40px;
+				border-radius: 8px;
+			}
+			span{
+				font-size: 12px;
+				margin-left: 12px;
+				
+			}
+		}
 	}
 	.card-body{
 		margin: 20px;
@@ -327,22 +406,6 @@ export default{
 		line-height: 17px;
 		font-size: 12px;
 		color: #999;
-	}
-	.btn_gz{
-		-webkit-tap-highli0ht-color: rgba(26,26,26,0);
-		font: inherit;
-		cursor: pointer;
-		background: none;
-		border: none;
-		outline: none;
-		-webkit-appearance: none;
-		height: 34px;
-		border-radius: 3px;
-		font-size: 14px;
-		font-weight: 600;
-		width: 102px;
-		color: #0084ff;
-		background-color: rgba(0,132,255,.08);
 	}
 	.name{
 		font-size: 28px;

@@ -11,11 +11,11 @@
 			<div>
 				<div v-for="(content, index) in tabContent" v-show="cur == index" :key="index">
 					<div class="hot-card flex" v-for="(item, index1) in content" :key="index1">
-						<div v-if="!item.children[0].thumbnail" class="flex ">						
-								<div class="hot-num">
+						<div v-if="!item.children[0].thumbnail" class="flex row">						
+								<div class="hot-num col-1">
 									<h3 :class="{ top: index1 < 3 }">{{ index1 + 1 }}</h3>
 								</div>
-								<div>
+								<div class="col-10">
 								<a :href="'https://www.zhihu.com/question/' + item.target.id" target="_blank" class="sub-title">{{ item.target.title }}</a>
 								<p class="mt-2 ellipsis contents">{{ item.target.excerpt }}</p>
 								<ul class="flex hot-item">
@@ -41,11 +41,11 @@
 							</div>
 							
 						</div>
-						<div v-else class="flex">
-								<div class="hot-num">
+						<div v-else class="flex row">
+								<div class="hot-num col-1">
 									<h3  :class="{ top: index1 < 3 }">{{ index1 + 1 }}</h3>
 								</div>
-								<div class="hot-content">
+								<div class="hot-content col-8">
 										<a :href="'https://www.zhihu.com/question/' + item.target.id" target="_blank" class="sub-title">{{ item.target.title }}</a>
 										<p class="mt-2 ellipsis contents">{{ item.target.excerpt }}</p>
 										<ul class="flex hot-item">
@@ -70,7 +70,7 @@
 											</li>
 										</ul>
 								</div>
-								<div class="hot-img "><img :src="item.children[0].thumbnail" width="180px" height="105px" class="tiny-round mt-3" /></div>
+								<div class="hot-img col-3"><img :src="item.children[0].thumbnail" width="180px" height="105px" class="tiny-round mt-3" /></div>
 								</div>
 								
 					</div>
@@ -141,6 +141,7 @@ export default {
 		color: #1a1a1a;
 		flex: 1 1;
 		overflow: hidden;
+		width: 600px;
 	}
 	.hot-item{
 		display: flex;
@@ -161,28 +162,29 @@ export default {
 		position: relative;
 	}
 }
-.tab-title {
-	display: flex;
-	align-items: center;
-	height: 63px;
-	padding: 0.625rem;
-	background-color: #fff;
-	li {
-		width: 60px;
-		height: 30px;
-		line-height: 30px;
-		text-align: center;
-		border-radius: 2px;
-		margin: 8px;
-		background-color: #f6f6f6;
-		color: #646464;
-		cursor: pointer;
+/*tab切换*/
+	.tab-title {
+		display: flex;
+		align-items: center;
+		height: 63px;
+		padding: 0.625rem;
+		background-color: #fff;
+		li {
+			width: 60px;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			border-radius: 2px;
+			margin: 8px;
+			background-color: #f6f6f6;
+			color: #646464;
+			cursor: pointer;
+		}
+		.active {
+			background-color: #e6f3ff;
+			color: #0c89ff;
+		}
 	}
-	.active {
-		background-color: #e6f3ff;
-		color: #0c89ff;
-	}
-}
 .top {
 	color: #fc9300;
 }
